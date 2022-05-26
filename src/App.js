@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import ChessTimer from './chess_timer'
 
 function App() {
   return (
@@ -17,6 +18,8 @@ function App() {
         >
           Learn React
         </a>
+              <br />
+              <ChessTimer />
       </header>
     </div>
   );
