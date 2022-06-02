@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
-import ChessTimer from './chess_timer'
+import ChessTimer from './components/chess_timer'
+import RandomNumb from './components/random_numb';
+import Quotes from './components/quotes';
 
 function App() {
   return (
@@ -19,7 +21,9 @@ function App() {
           Learn React
         </a>
               <br />
-              <ChessTimer />
+              <RandomNumb min={1} max={7} />
+              <br />
+              <Quotes />
       </header>
     </div>
   );
