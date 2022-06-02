@@ -3,7 +3,6 @@ import React from "react";
 export default class MyTimer extends React.Component {
 
     static currentTimer;
-
     constructor(props) {
         super(props);
         this.seconds = props.seconds ? props.seconds : 0;
