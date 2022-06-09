@@ -1,13 +1,14 @@
 import logo from './logo.svg';
 import './App.css';
-import ChessTimer from './components/chess_timer'
 import RandomNumb from './components/random_numb';
 import Quotes from './components/quotes';
+import Svg from './components/svg';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+        <header className="App-header">
+            <Svg></Svg>
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
