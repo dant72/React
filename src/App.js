@@ -7,8 +7,8 @@ import Svg from './components/svg';
 function App() {
   return (
     <div className="App">
-        <header className="App-header">
-            <Svg></Svg>
+          <header className="App-header">
+              <Svg></Svg>
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.

@@ -53,7 +53,7 @@ export default class Svg extends React.Component {
         {
             let rotate = `rotate(${i * 360 / 12} ${this.size/2} ${this.size/2})`;
             tmp.push(<circle cx="50%" cy={this.size/20} r={this.size/30} fill="green" 
-            transform={rotate} />);
+                transform={rotate} filter="url(#myFilter)"/>);
         }
 
         return tmp;
@@ -65,16 +65,16 @@ export default class Svg extends React.Component {
         let widthArr = this.size * 0.05;
         let yArr = Math.floor(this.size / 2 - widthArr / 2);
         let rotate = `rotate(${this.state.angle} ${this.size/2} ${this.size/2})`;
-           tmp.push(<rect x={yArr} y={yArr} width={widthArr} height={this.size / 2 * 0.9} fill="yellow" 
-           transform={rotate}/>);
+           tmp.push(<rect x={yArr} y={yArr} width={widthArr} height={this.size / 2 * 0.9} fill="orange" 
+               transform={rotate} filter="url(#myFilter)" />);
 
            let rotate2 = `rotate(${this.state.angle2} ${this.size/2} ${this.size/2})`;
            tmp.push(<rect x={yArr} y={yArr} width={widthArr} height={this.size / 2 * 0.9} fill="blue" 
-           transform={rotate2}/>);
+               transform={rotate2} filter="url(#myFilter)" />);
 
            let rotate3 = `rotate(${this.state.angle3} ${this.size/2} ${this.size/2})`;
            tmp.push(<rect x={yArr} y={yArr} width={widthArr} height={this.size / 3 * 0.9} fill="green" 
-           transform={rotate3}/>);
+               transform={rotate3} filter="url(#myFilter)" />);
 
            return tmp;
     }
@@ -84,8 +84,22 @@ export default class Svg extends React.Component {
   return (
     <svg version="1.1"
      width={this.size} height={this.size}
-     viewBox={vb} >
-         <circle cx="50%" cy="50%" r="50%" fill="red" />
+          viewBox={vb} >
+          <filter id="myFilter" filterUnits="userSpaceOnUse"
+              x="0" y="0"
+              width="100%" height="100%" >
+              <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur" />
+              <feOffset in="blur" dx="4" dy="4" result="offsetBlur" />
+              <feSpecularLighting in="blur" surfaceScale="5" specularConstant=".75"
+                  specularExponent="20" lighting-color="#bbbbbb"
+                  result="specOut">
+                  <fePointLight x="-5000" y="-10000" z="20000" />
+              </feSpecularLighting>
+              <feComposite in="specOut" in2="SourceAlpha" operator="in" result="specOut" />
+              <feComposite in="SourceGraphic" in2="specOut" operator="arithmetic"
+                  k1="0" k2="1" k3="1" k4="0" result="litPaint" />
+          </filter>
+          <circle cx="50%" cy="50%" r="50%" fill="red" filter="url(#myFilter)"/>
          {this.manyLines()}
          {this.arrow()}
     </svg>
