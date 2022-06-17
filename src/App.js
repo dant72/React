@@ -3,12 +3,13 @@ import './App.css';
 import RandomNumb from './components/random_numb';
 import Quotes from './components/quotes';
 import Svg from './components/svg';
+import Game from './components/game';
 
 function App() {
   return (
-    <div className="App">
+      <div className="App">
+          <Game></Game>
           <header className="App-header">
-              <Svg></Svg>
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
