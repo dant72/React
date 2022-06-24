@@ -4,11 +4,13 @@ import RandomNumb from './components/random_numb';
 import Quotes from './components/quotes';
 import Svg from './components/svg';
 import Game from './components/game';
+import Cell from './components/cell';
+import Field from './components/field';
 
 function App() {
   return (
       <div className="App">
-          <Game></Game>
+          <Field word="HELLO"></Field>
           <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
