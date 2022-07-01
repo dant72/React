@@ -10,9 +10,7 @@ function Field(props) {
     word = props.word.split('');
     const [show, setShow] = useState(initShow());
     const click = () => { setShow(answer(text, word, show)); }
-    
-    
-
+   
     return (
         <>
             <div className='horizontal'>
@@ -36,6 +34,18 @@ function field(show) {
 };
 
 function initShow() {
+    let tmp = initSh();
+    if (document.cookie != '') {
+        let js = JSON.parse(document.cookie);
+        for (let i = 0; i < js.length; i++) {
+            tmp[i] = js[i];
+        }
+    }
+
+    return tmp;
+}
+
+function initSh() {
     let tmp = [];
     for (let i = 0; i < word.length; i++) {
         tmp[i] = '';
@@ -51,10 +61,11 @@ function handleChange(event) {
 function answer(text, word, show) {
 
     for (let i = 0; i < word.length; i++) {
-        if (word[i].toLowerCase() === text.toLowerCase())
+        if (word[i].toLowerCase() === text.toLowerCase()) {
             show[i] = word[i];
+            saveWord(show);
+        }          
     }
-
     console.log(text);
     console.log(word);
     console.log(show);
@@ -64,11 +75,20 @@ function answer(text, word, show) {
 
 function gameOver(text, word, show) {
     if (show.join('').toLowerCase() === word.join('').toLowerCase() || text.toLowerCase() === word.join('').toLowerCase()) {
+        document.cookie = "";
         alert(`You win! Word: ${word.join('')}`);
-        show = initShow();
+        show = initSh();
+        saveWord(show);
     }
 
     return Array.from(show);
+}
+
+function saveWord(text) {
+
+    var saveJson = JSON.stringify(text);
+    console.log(saveJson);
+    document.cookie = saveJson;
 }
 
 export default Field;
