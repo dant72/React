@@ -2,15 +2,21 @@ import logo from './logo.svg';
 import './App.css';
 import RandomNumb from './components/random_numb';
 import Quotes from './components/quotes';
-import Svg from './components/svg';
-import Game from './components/game';
-import Cell from './components/cell';
-import Field from './components/field';
+import { Link } from "react-router-dom";
 
 function App() {
   return (
       <div className="App">
-          <Field word="HELLO"></Field>
+          <nav
+              style={{
+                  borderBottom: "solid 1px",
+                  paddingBottom: "1rem",
+                  fontSize: "30px"
+              }}
+          >
+              <Link to="/field">Pole chudec</Link> |{" "}
+              <Link to="/game">Game</Link>
+          </nav>
           <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
