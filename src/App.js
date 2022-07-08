@@ -5,12 +5,32 @@ import Quotes from './components/quotes';
 import { Link } from "react-router-dom";
 import React from 'react';
 
-const ThemeContext = React.createContext('light');
+const ThemeContext = React.createContext({
+    theme: 'light',
+    toggleTheme: () => { },
+});
 
 class App extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.toggleTheme = () => {
+            this.setState(state => ({
+                theme:
+                    state.theme === 'dark'
+                        ? 'light'
+                        : 'dark'
+            }));
+        };
+
+        this.state = {
+            theme: 'light',
+            toggleTheme: this.toggleTheme,
+        };
+    }
     render() {
         return (
-            <ThemeContext.Provider value='light'>
+            <ThemeContext.Provider value={this.state}>
                 <Toolbar />
             </ThemeContext.Provider>
         );
@@ -23,7 +43,7 @@ function Toolbar() {
             {
                 theme => (
                     <div className="App">
-                        <ThemedButton />
+                            <ThemedButton />
                         <nav
                             style={{
                                 borderBottom: "solid 1px",
@@ -34,7 +54,7 @@ function Toolbar() {
                             <Link to="/field">Pole chudec</Link> |{" "}
                             <Link to="/game">Game</Link>
                         </nav>
-                        <header className={`${theme} App-header`}>
+                        <header className={`${theme.theme} App-header`}>
                             <img src={logo} className="App-logo" alt="logo" />
                             <p>
                                 Edit <code>src/App.js</code> and save to reload.
@@ -59,12 +79,17 @@ function Toolbar() {
     );
 }
 
-class ThemedButton extends React.Component {
-
-    static contextType = ThemeContext;
-    render() {
-        return <button theme={this.context}>Change themes</button>;
-    }
+function ThemedButton () {
+    return (
+        <ThemeContext.Consumer>
+            {({ theme, toggleTheme }) => (
+                <button
+                    onClick={toggleTheme} className={theme.theme}>
+                    Toggle Theme
+                </button>
+            )}
+        </ThemeContext.Consumer>
+    );
 }
 
 export default App;
