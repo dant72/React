@@ -10,4 +10,15 @@
 .horizontal
 {
     display:inline-flex;
+    
+}
+
+.field
+{
+    text-align:center;
+}
+
+.qSize {
+
+    max-width: 230px;
 }
