@@ -30,7 +30,7 @@ function Field(props) {
             }),
         }
 
-        fetch("http://localhost:7777/word.php", data)
+        fetch("/word.php", data)
             .then((response) => response.json())
             .then((responseJson) => {
 
